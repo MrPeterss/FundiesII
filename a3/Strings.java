@@ -1,5 +1,4 @@
 package HW.a3;
-// CS 2510, Assignment 3
 
 import tester.*;
 
@@ -22,6 +21,20 @@ interface ILoString {
     ILoString merge(ILoString that);
     // checks if the given string comes before the given list
     ILoString mergeHelp(ILoString acc);
+    // reverses the list of strings
+    ILoString reverse();
+    // helper for the reverse method
+    ILoString reverseHelp(ILoString acc);
+    // determines if the given list is a "doubled" list
+    boolean isDoubledList();
+    // helper for the isDoubledList method
+    boolean isDoubledListHelp(String s);
+    // determines if the list is a palindrome list
+    boolean isPalindromeList();
+    // determines if the list is the same as the given list
+    boolean sameList(ILoString that);
+    // helper for the sameList method
+    boolean sameListHelp(String s, ILoString that);
 }
 
 // to represent an empty list of Strings
@@ -31,15 +44,25 @@ class MtLoString implements ILoString {
     /*
      TEMPLATE
      FIELDS:
-     ... NONE ...
-
+      ... NONE ...
      METHODS
-     ... this.combine() ...     -- String
-     ... this.sort() ...        -- ILoString
-     ... this.insert(String) ...-- ILoString
-
-     METHODS FOR FIELDS
-     ... NONE ...
+      ... this.combine() ...                        -- String
+      ... this.sort() ...                           -- ILoString
+      ... this.insert(String) ...                   -- ILoString
+      ... this.isSorted() ...                       -- boolean
+      ... this.isSortedHelp(String) ...             -- boolean
+      ... this.interleave(ILoString) ...            -- ILoString
+      ... this.merge(ILoString) ...                 -- ILoString
+      ... this.mergeHelp(ILoString) ...             -- ILoString
+      ... this.reverse() ...                        -- ILoString
+      ... this.reverseHelp(ILoString) ...           -- ILoString
+      ... this.isDoubledList() ...                  -- boolean
+      ... this.isDoubledListHelp(String) ...        -- boolean
+      ... this.isPalindromeList() ...               -- boolean
+      ... this.sameList(ILoString) ...              -- boolean
+      ... this.sameListHelp(String, ILoString) ...  -- boolean
+     METHODS FOR FIELDS:
+      ... NONE ...
      */
     
     // combine all Strings in this list into one
@@ -77,8 +100,44 @@ class MtLoString implements ILoString {
         return that;
     }
 
+    // returns the accumulator when the list is empty
     public ILoString mergeHelp(ILoString acc) {
         return acc;
+    }
+
+    // reverses the list of strings (returns the empty list)
+    public ILoString reverse() {
+        return this;
+    }
+
+    // returns the accumulator when the list is empty
+    public ILoString reverseHelp(ILoString acc) {
+        return acc;
+    }
+
+    // determines if the given list is a "doubled" list
+    public boolean isDoubledList() {
+        return true;
+    }
+
+    // helper for the isDoubledList method
+    public boolean isDoubledListHelp(String s) {
+        return false;
+    }
+
+    // determines if the list is a palindrome list
+    public boolean isPalindromeList() {
+        return false;
+    }
+
+    // determines if the list is the same as the given list
+    public boolean sameList(ILoString that) {
+        return that.sameListHelp(null, this);
+    }
+
+    // helper for the sameList method
+    public boolean sameListHelp(String s, ILoString that) {
+        return s == null;
     }
 }
 
@@ -95,18 +154,40 @@ class ConsLoString implements ILoString {
     /*
      TEMPLATE
      FIELDS:
-     ... this.first ...         -- String
-     ... this.rest ...          -- ILoString
-     
+      ... this.first ...         -- String
+      ... this.rest ...          -- ILoString
      METHODS
-     ... this.combine() ...     -- String
-     ... this.sort() ...        -- ILoString
-     ... this.insert(String) ...-- ILoString
-     
-     METHODS FOR FIELDS
-     ... this.first.concat(String) ...        -- String
-     ... this.first.compareTo(String) ...     -- int
-     ... this.rest.combine() ...              -- String
+      ... this.combine() ...     -- String
+      ... this.sort() ...        -- ILoString
+      ... this.insert(String) ...-- ILoString
+      ... this.isSorted() ...    -- boolean
+      ... this.isSortedHelp(String) ... -- boolean
+      ... this.interleave(ILoString) ... -- ILoString
+      ... this.merge(ILoString) ... -- ILoString
+      ... this.mergeHelp(ILoString) ... -- ILoString
+      ... this.reverse() ...     -- ILoString
+      ... this.reverseHelp(ILoString) ... -- ILoString
+      ... this.isDoubledList() ... -- boolean
+      ... this.isDoubledListHelp(String) ... -- boolean
+      ... this.isPalindromeList() ... -- boolean
+      ... this.sameList(ILoString) ... -- boolean
+      ... this.sameListHelp(String, ILoString) ... -- boolean
+     METHODS FOR FIELDS:
+      ... this.rest.combine() ... -- String
+      ... this.rest.sort() ... -- ILoString
+      ... this.rest.insert(String) ... -- ILoString
+      ... this.rest.isSorted() ... -- boolean
+      ... this.rest.isSortedHelp(String) ... -- boolean
+      ... this.rest.interleave(ILoString) ... -- ILoString
+      ... this.rest.merge(ILoString) ... -- ILoString
+      ... this.rest.mergeHelp(ILoString) ... -- ILoString
+      ... this.rest.reverse() ... -- ILoString
+      ... this.rest.reverseHelp(ILoString) ... -- ILoString
+      ... this.rest.isDoubledList() ... -- boolean
+      ... this.rest.isDoubledListHelp(String) ... -- boolean
+      ... this.rest.isPalindromeList() ... -- boolean
+      ... this.rest.sameList(ILoString) ... -- boolean
+      ... this.rest.sameListHelp(String, ILoString) ... -- boolean
      */
     
     // combine all Strings in this list into one
@@ -148,8 +229,44 @@ class ConsLoString implements ILoString {
         return this.mergeHelp(that);
     }
 
+    // checks if the given string comes before the given list
     public ILoString mergeHelp(ILoString acc) {
         return this.rest.mergeHelp(acc.insert(this.first));
+    }
+
+    // reverses the list of strings
+    public ILoString reverse() {
+        return this.reverseHelp(new MtLoString());
+    }
+
+    // helper for the reverse method
+    public ILoString reverseHelp(ILoString acc) {
+        return rest.reverseHelp(new ConsLoString(this.first, acc));
+    }
+
+    // determines if the given list is a "doubled" list
+    public boolean isDoubledList() {
+        return this.rest.isDoubledListHelp(this.first);
+    }
+
+    // helper for the isDoubledList method
+    public boolean isDoubledListHelp(String s) {
+        return s.equals(this.first) && this.rest.isDoubledList();
+    }
+
+    // determines if the given list is a palindrome list
+    public boolean isPalindromeList() {
+        return this.reverse().sameList(this);
+    }
+
+    // determines if the given list is the same as the given list
+    public boolean sameList(ILoString that) {
+        return that.sameListHelp(this.first, this.rest);
+    }
+
+    // helper for the sameList method
+    public boolean sameListHelp(String s, ILoString that) {
+        return s.equals(this.first) && that.sameList(this.rest);
     }
 }
 
@@ -171,6 +288,20 @@ class ExamplesStrings{
             new ConsLoString("lamb.",
                 new ConsLoString("little ",
                     new ConsLoString("Mary ", new MtLoString())))));
+
+    ILoString doubledList = new ConsLoString("a ",
+        new ConsLoString("a ",
+            new ConsLoString("b ",
+                new ConsLoString("b ",
+                    new ConsLoString("c ",
+                        new ConsLoString("c ", new MtLoString()))))));
+
+    ILoString palin = new ConsLoString("a ",
+        new ConsLoString("b ",
+            new ConsLoString("c ",
+                new ConsLoString("c ",
+                    new ConsLoString("b ",
+                        new ConsLoString("a ", new MtLoString()))))));
     
     // test the method combine for the lists of Strings
     boolean testCombine(Tester t){
@@ -244,5 +375,60 @@ class ExamplesStrings{
                                             new ConsLoString("Mary ",
                                                 new MtLoString()))))))))) &&
             t.checkExpect(this.mary.merge(new MtLoString()), sorted);
+    }
+
+    // test the method for mergeHelp
+    boolean testMergeHelp(Tester t) {
+        return
+            t.checkExpect(this.mary.mergeHelp(this.interesting),
+                new ConsLoString("a ",
+                    new ConsLoString("had ",
+                        new ConsLoString("interesting ",
+                            new ConsLoString("INTERESTING ",
+                                new ConsLoString("interesting ",
+                                    new ConsLoString("lamb.",
+                                        new ConsLoString("little ",
+                                            new ConsLoString("Mary ",
+                                                new MtLoString()))))))))) &&
+            t.checkExpect(this.mary.mergeHelp(new MtLoString()), sorted);
+    }
+
+    // test the method for reverse
+    boolean testReverse(Tester t) {
+        return
+            t.checkExpect(this.mary.reverse(),
+                new ConsLoString("lamb.",
+                    new ConsLoString("little ",
+                        new ConsLoString("a ",
+                            new ConsLoString("had ",
+                                new ConsLoString("Mary ", new MtLoString())))))) &&
+            t.checkExpect(this.interesting.reverse(),
+                new ConsLoString("interesting ",
+                    new ConsLoString("INTERESTING ",
+                        new ConsLoString("interesting ", new MtLoString())))) &&
+            t.checkExpect(this.palin.reverse(), this.palin);
+    }
+
+    // test the method for isDoubledList
+    boolean testIsDoubledList(Tester t) {
+        return
+            t.checkExpect(this.mary.isDoubledList(), false) &&
+            t.checkExpect(doubledList.isDoubledList(), true) &&
+            t.checkExpect(this.interesting.isDoubledList(), false);
+    }
+
+    // test sameList
+    boolean testSameList(Tester t) {
+        return
+            t.checkExpect(this.mary.sameList(this.mary), true) &&
+            t.checkExpect(this.mary.sameList(this.interesting), false) &&
+            t.checkExpect(this.mary.sameList(this.sorted), false);
+    }
+
+    // test the method for isPalindromeList
+    boolean testIsPalindromeList(Tester t) {
+        return
+            t.checkExpect(this.mary.isPalindromeList(), false) &&
+            t.checkExpect(this.palin.isPalindromeList(), true);
     }
 }

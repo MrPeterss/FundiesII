@@ -21,7 +21,7 @@ interface ILoString {
     // merge the given sorted list with another sorted list but keep it sorted
     ILoString merge(ILoString that);
     // checks if the given string comes before the given list
-    boolean goesAfter(String s);
+    ILoString mergeHelp(ILoString acc);
 }
 
 // to represent an empty list of Strings
@@ -77,9 +77,8 @@ class MtLoString implements ILoString {
         return that;
     }
 
-    // checks if the given string comes before the given list
-    public boolean goesAfter(String s) {
-        return true;
+    public ILoString mergeHelp(ILoString acc) {
+        return acc;
     }
 }
 
@@ -146,16 +145,11 @@ class ConsLoString implements ILoString {
 
     // merge the given sorted list with another sorted list but keep it sorted
     public ILoString merge(ILoString that) {
-        if (that.goesAfter(this.first)) {
-            return new ConsLoString(this.first, this.rest.merge(that));
-        } else {
-            return that.merge(this);
-        }
+        return this.mergeHelp(that);
     }
 
-    // checks if the given string comes before the given list
-    public boolean goesAfter(String s) {
-        return s.toLowerCase().compareTo(this.first.toLowerCase()) >= 0;
+    public ILoString mergeHelp(ILoString acc) {
+        return this.rest.mergeHelp(acc.insert(this.first));
     }
 }
 
@@ -248,6 +242,7 @@ class ExamplesStrings{
                                     new ConsLoString("lamb.",
                                         new ConsLoString("little ",
                                             new ConsLoString("Mary ",
-                                                new MtLoString())))))))));
+                                                new MtLoString()))))))))) &&
+            t.checkExpect(this.mary.merge(new MtLoString()), sorted);
     }
 }

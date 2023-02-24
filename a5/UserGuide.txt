@@ -1,0 +1,29 @@
+-------------------------------------------------------------------------------
+
+                          USER GUIDE FOR SIMON SAYS
+
+                              by: Peter Bidoshi
+                                      &
+                                Berke Maltepe
+
+-------------------------------------------------------------------------------
+
+Step 1: Set your run configuration to the correct path, "ExamplesSimon"
+
+Step 2: Run the Game
+
+Step 3: Upon running the game, a color will be darkened on the screen. You should remember this color.
+
+Step 4: The game will then prompt you to recall the "sequence" of colors, because this is round 1, there is only 1 color that you should recall
+
+Step 5: Click the color that you saw on the screen.
+
+Step 6: The game will now darken 2 colors on the screen, the first color will be the same as it was in the first round, but the second color is another random color. Remember these 2 colors.
+
+Step 7: The Game will prompt you again to recall the sequence. click the buttons in the correct order
+
+NOTE: Failing to recall the colors in the correct order will result in a loss
+
+Step 8: Colors will continue to be added the to sequence. Each round, you will be tasked with recalling 1 more color than the round before, however, all the colors except for the last one will be colors that you have seen before.
+
+Step 9: See how many colors you can remember at once! Enjoy!

@@ -8,20 +8,45 @@
 
 -------------------------------------------------------------------------------
 
-In Our design, we opted for the minimal use of classes in order to prevent the file from getting too out of hand with too many moving parts. We believe that this provided us a very optimal and rewarding coding experience.
+    In Our design, we opted for the minimal use of classes in order to prevent the file from
+getting too out of hand with too many moving parts. We believe that this provided us a very
+optimal and rewarding coding experience.
 
-Before we begin, it is important to note that some important constants that were used throughout the code were stored in the IConstants interface, and many of our classes that utilize these constants implement them for only that reason. IConstants only serves the purpose to hold those constants.
+    Before we begin, it is important to note that some important constants that were used throughout
+the code were stored in the IConstants interface, and many of our classes that utilize these
+constants implement them for only that reason. IConstants only serves the purpose to hold those
+constants.
 
-In our code, the SimonWorld class represents the state of the game, as well as the actual world that is being played on. As you may see, there are many convenience constructors to aid in our changing of the game state throughout the game time. Each constructor has a description of its specific use case as a comment above the constructor. For convenience’s sake, we figured that rather than calling the main constructor to update the game state every time part of it needs updating, it would be more efficient to have constructors that only edit parts of the game state, and also take in a SimonWorld, so we can keep most fields the same, only editing the ones we need to.
+    In our code, the SimonWorld class represents the state of the game, as well as the actual world
+that is being played on. As you may see, there are many convenience constructors to aid in our
+changing of the game state throughout the game time. Each constructor has a description of its
+specific use case as a comment above the constructor. For convenience’s sake, we figured that
+rather than calling the main constructor to update the game state every time part of it needs
+updating, it would be more efficient to have constructors that only edit parts of the game state,
+and also take in a SimonWorld, so we can keep most fields the same, only editing the ones we need
+to.
 
-Depending on the fields in the SimonWorld, the game will behave differently. For example, If the game is in the "show mode" (isInShowMode = true), the on tick method will go through the entire list of the tempSequence, showing all the buttons. If the game is not in "show mode" (isInShowMode = false), the on tick method will be ignored and the game will be listening for clicks instead. Using this logic, as well as constantly updating the SimonWorld, the game is able to be played.
+    Depending on the fields in the SimonWorld, the game will behave differently. For example, If the
+game is in the "show mode" (isInShowMode = true), the on tick method will go through the entire
+list of the tempSequence, showing all the buttons. If the game is not in "show mode"
+(isInShowMode = false), the on tick method will be ignored and the game will be listening for
+clicks instead. Using this logic, as well as constantly updating the SimonWorld, the game is able
+to be played.
 
-The ILoButton interface is a list interface with many helpful methods implemented. The methods in this interface are essential to checking for changing the state of the game in the onTick and onMousePressed methods in the SimonWorld class.
+    The ILoButton interface is a list interface with many helpful methods implemented. The methods in
+this interface are essential to checking for changing the state of the game in the onTick and
+onMousePressed methods in the SimonWorld class.
 
-The MtLoButton class implements the ILoButton interface and is the representation of an empty list. There are no fields to this class
+    The MtLoButton class implements the ILoButton interface and is the representation of an empty list.
+There are no fields to this class.
 
-The ConsLoButton class implements the ILoButton interface and is the representation of a non-empty list. It has two fields, the first, which is a button, and the rest, which is an ILoButton. 
+    The ConsLoButton class implements the ILoButton interface and is the representation of a non-empty
+list. It has two fields, the first, which is a button, and the rest, which is an ILoButton.
 
-The Button class is a helpful class that represents a button in the world, these buttons have fields representing coordinates that define where they are placed, colors, and have many methods. These methods are important for drawing the buttons to the screen, and many of the methods are helpful for the methods in the ILoButton interface.
+    The Button class is a helpful class that represents a button in the world, these buttons have fields
+representing coordinates that define where they are placed, colors, and have many methods. These methods
+are important for drawing the buttons to the screen, and many of the methods are helpful for the methods
+in the ILoButton interface.
 
-The Examples class is strictly to provide examples that utilize every constructor, as well as tests for every single method in every class. We hope you enjoyed our implementation of Simon Says!
+    The Examples class is strictly to provide examples that utilize every constructor, as well as tests
+for every single method in every class. We hope you enjoyed our implementation of Simon Says!

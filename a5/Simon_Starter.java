@@ -57,15 +57,17 @@ class SimonWorld extends World implements IConstants {
   }
 
   // convenience constructor to update showing during show mode
-  SimonWorld(SimonWorld that, boolean shouldShow, WorldImage darkenedButton, ILoButton nextSequence) {
+  SimonWorld(SimonWorld that, boolean shouldShow, WorldImage darkenedButton,
+             ILoButton nextSequence) {
     this(that.buttons, that.sequence, nextSequence, that.playerSequence, darkenedButton, true,
          that.random, shouldShow, that.text);
   }
 
   // convenience constructor for getting out of show mode
-  SimonWorld(SimonWorld that, boolean isInShowMode, boolean shouldShow, WorldImage darkenedButton) {
-    this(that.buttons, that.sequence, that.tempSequence, that.playerSequence, darkenedButton, isInShowMode,
-         that.random, shouldShow, "Repeat");
+  SimonWorld(SimonWorld that, boolean isInShowMode, boolean shouldShow,
+             WorldImage darkenedButton) {
+    this(that.buttons, that.sequence, that.tempSequence, that.playerSequence, darkenedButton,
+        isInShowMode, that.random, shouldShow, "Repeat");
   }
 
   // convenience constructor for when the player has passed the previous round
@@ -75,15 +77,16 @@ class SimonWorld extends World implements IConstants {
   }
 
   // convenience constructor for when the player updates their sequence
-  SimonWorld(SimonWorld that, ILoButton playerSequence, WorldImage drawDarkened, boolean updatePlayer) {
-    this(that.buttons, that.sequence, that.sequence, playerSequence, drawDarkened, that.isInShowMode,
-        that.random, that.shouldShow, that.text);
+  SimonWorld(SimonWorld that, ILoButton playerSequence,
+             WorldImage drawDarkened, boolean updatePlayer) {
+    this(that.buttons, that.sequence, that.sequence, playerSequence, drawDarkened,
+        that.isInShowMode, that.random, that.shouldShow, that.text);
   }
 
   // convenience constructor for when the player lifts their mouse
   SimonWorld(SimonWorld that, WorldImage drawDarkened) {
-    this(that.buttons, that.sequence, that.tempSequence, that.playerSequence, drawDarkened, that.isInShowMode,
-        that.random, that.shouldShow, that.text);
+    this(that.buttons, that.sequence, that.tempSequence, that.playerSequence,
+        drawDarkened, that.isInShowMode, that.random, that.shouldShow, that.text);
   }
 
   /* TEMPLATE
@@ -160,10 +163,14 @@ class SimonWorld extends World implements IConstants {
   // Draw the current state of the world
   public WorldScene makeScene() {
     WorldScene background = new WorldScene(SCENE_SIZE, SCENE_SIZE);
-    background = background.placeImageXY(new TextImage("Simon Says", 20, Color.BLACK), SCENE_SIZE / 2, 20);
-    background = background.placeImageXY(new TextImage(this.text, 20, Color.RED), SCENE_SIZE / 2, 50);
-    background = background.placeImageXY(this.buttons.drawButtons(), SCENE_SIZE / 2, SCENE_SIZE / 2);
-    background = background.placeImageXY(this.darkenedButton, SCENE_SIZE / 2, SCENE_SIZE / 2);
+    background = background.placeImageXY(new TextImage("Simon Says", 20, Color.BLACK),
+        SCENE_SIZE / 2, 20);
+    background = background.placeImageXY(new TextImage(this.text, 20, Color.RED),
+        SCENE_SIZE / 2, 50);
+    background = background.placeImageXY(this.buttons.drawButtons(),
+        SCENE_SIZE / 2, SCENE_SIZE / 2);
+    background = background.placeImageXY(this.darkenedButton,
+        SCENE_SIZE / 2, SCENE_SIZE / 2);
     return background;
   }
 
@@ -192,20 +199,19 @@ class SimonWorld extends World implements IConstants {
         }
       }
     }
-    System.out.println("not in show mode");
     return this;
   }
 
   // Returns the final scene with the given message displayed
   public WorldScene lastScene(String msg) {
     WorldScene background = new WorldScene(SCENE_SIZE, SCENE_SIZE);
-    background = background.placeImageXY(new TextImage(msg, 20, Color.BLACK), SCENE_SIZE / 2, SCENE_SIZE / 2);
+    background = background.placeImageXY(new TextImage(msg, 20, Color.BLACK),
+        SCENE_SIZE / 2, SCENE_SIZE / 2);
     return background;
   }
 
   // handles mouse down events
   public SimonWorld onMousePressed(Posn pos) {
-    System.out.println(pos.x+", "+ pos.y);
     // make sure we are not in show mode
     if (!this.isInShowMode) {
       // get the place where the user pressed
@@ -226,13 +232,11 @@ class SimonWorld extends World implements IConstants {
             // update the show mode -
             // update should show -
             // update the darkened button
-            System.out.println("good!");
             ILoButton newSequence = this.sequence.addToSequence(this.random);
             return new SimonWorld(this, newSequence, newSequence.drawDarkened());
           } else {
             // update the player sequence
             // update the darkened button
-            System.out.println("updated player sequence");
             return new SimonWorld(this, newPlayerSequence, pressed.drawDark(), true);
           }
         } else {
@@ -258,26 +262,37 @@ class SimonWorld extends World implements IConstants {
 interface ILoButton extends IConstants {
   // Draw the buttons in the list
   WorldImage drawButtons();
+
   // Draws the first button (if it is there) darkened
   WorldImage drawDarkened();
+
   // Gets the next sequence of buttons
   ILoButton getNextSequence();
+
   // Is the sequence done?
   boolean isDone();
+
   // Is the position given over a button?
   Button isOverButton(Posn pos);
+
   // Does this sequence start with the given sequence?
   boolean startsWith(ILoButton sequence);
+
   // Helper for startsWith
   ILoButton chop(ILoButton sequence);
+
   // helper for chop
   ILoButton chopHelp(Button button, ILoButton lob);
+
   // Is this sequence the same as the given sequence?
   boolean isSameAs(ILoButton sequence);
+
   // Helper for isSameAs
   boolean isSameAsHelper(Button button, ILoButton sequence);
+
   // add the value to the innermost part of the list
   ILoButton addInner(Button b);
+
   // add a random button to the sequence
   ILoButton addToSequence(Random random);
 } 
@@ -314,42 +329,55 @@ class MtLoButton implements ILoButton {
   public WorldImage drawButtons() {
     return new EmptyImage();
   }
-  // Draws the first button (if it is there) darkened; in this case, there is no button, so return an empty image
+
+  // Draws the first button (if it is there) darkened;
+  // in this case, there is no button, so return an empty image
   public WorldImage drawDarkened() {
     return new EmptyImage();
   }
-  // Gets the next sequence of buttons; in this case, there is no next sequence, so return an empty list
+
+  // Gets the next sequence of buttons; in this case, there is no next sequence,
+  // so return an empty list
   public ILoButton getNextSequence() {
     return new MtLoButton();
   }
+
   // Is the sequence done? In this case, the sequence is done
   public boolean isDone() {
     return true;
   }
-  // Is the position given over a button? In this case, there are no buttons, so return NO_BUTTON
+
+  // Is the position given over a button? In this case,
+  // there are no buttons, so return NO_BUTTON
   public Button isOverButton(Posn pos) {
     return NO_BUTTON;
   }
+
   // Does this sequence start with the given sequence?
   public boolean startsWith(ILoButton sequence) {
     return sequence.isSameAs(this);
   }
+
   // chop the list to the length of the given list
   public ILoButton chop(ILoButton sequence) {
     return new MtLoButton();
   }
+
   // helper for chop
   public ILoButton chopHelp(Button button, ILoButton lob) {
     return new MtLoButton();
   }
+
   // Is this sequence the same as the given sequence?
   public boolean isSameAs(ILoButton sequence) {
     return sequence.isSameAsHelper(NO_BUTTON, this);
   }
+
   // Helper for isSameAs
   public boolean isSameAsHelper(Button button, ILoButton sequence) {
     return button.isSameButtonAs(NO_BUTTON);
   }
+
   // add the value to the innermost part of the list
   public ILoButton addInner(Button b) {
     return new ConsLoButton(b, new MtLoButton());
@@ -439,14 +467,17 @@ class ConsLoButton implements ILoButton {
   public WorldImage drawDarkened() {
     return this.first.drawDark();
   }
+
   // Gets the next sequence of buttons
   public ILoButton getNextSequence() {
     return this.rest;
   }
+
   // Is the sequence done?
   public boolean isDone() {
     return false;
   }
+
   // Is the position given over a button?
   public Button isOverButton(Posn pos) {
     if (this.first.isOverButton(pos)) {
@@ -456,22 +487,27 @@ class ConsLoButton implements ILoButton {
       return this.rest.isOverButton(pos);
     }
   }
+
   // Does this sequence start with the given sequence?
   public boolean startsWith(ILoButton sequence) {
     return this.chop(sequence).isSameAs(sequence);
   }
+
   // chop off the buttons after the given sequence length
   public ILoButton chop(ILoButton sequence) {
     return sequence.chopHelp(this.first, this.rest);
   }
+
   // helper for chop
   public ILoButton chopHelp(Button button, ILoButton lob) {
     return new ConsLoButton(button,lob.chop(this.rest));
   }
+
   // Is this sequence the same as the given sequence?
   public boolean isSameAs(ILoButton sequence) {
     return sequence.isSameAsHelper(this.first, this.rest);
   }
+
   // Helper for isSameAs
   public boolean isSameAsHelper(Button button, ILoButton sequence) {
     if (button.isSameButtonAs(NO_BUTTON)) {
@@ -480,10 +516,12 @@ class ConsLoButton implements ILoButton {
       return this.first.isSameButtonAs(button) && this.rest.isSameAs(sequence);
     }
   }
+
   // add the value to the innermost part of the list
   public ILoButton addInner(Button b) {
     return new ConsLoButton(this.first, this.rest.addInner(b));
   }
+
   // add a random button to the sequence
   public ILoButton addToSequence(Random random) {
     int randInt = random.nextInt(4);
@@ -639,14 +677,18 @@ class ExamplesSimon implements IConstants {
 
   // Tests for drawButton
   boolean testDrawButton(Tester t) {
-    return t.checkExpect(redButton.drawButton(Color.RED), new RectangleImage(100, 100, "solid",
+    return t.checkExpect(redButton.drawButton(Color.RED),
+        new RectangleImage(100, 100, "solid",
         Color.RED).movePinhole(100, 100))
-        && t.checkExpect(greenButton.drawButton(Color.GREEN), new RectangleImage(100, 100, "solid",
-        Color.GREEN).movePinhole(400, 100))
-        && t.checkExpect(blueButton.drawButton(Color.BLUE), new RectangleImage(100, 100, "solid",
-        Color.BLUE).movePinhole(100, 400))
-        && t.checkExpect(yellowButton.drawButton(Color.YELLOW), new RectangleImage(100, 100, "solid",
-        Color.YELLOW).movePinhole(400, 400));
+        && t.checkExpect(greenButton.drawButton(Color.GREEN),
+          new RectangleImage(100, 100, "solid",
+          Color.GREEN).movePinhole(400, 100))
+        && t.checkExpect(blueButton.drawButton(Color.BLUE),
+          new RectangleImage(100, 100, "solid",
+          Color.BLUE).movePinhole(100, 400))
+        && t.checkExpect(yellowButton.drawButton(Color.YELLOW),
+          new RectangleImage(100, 100, "solid",
+          Color.YELLOW).movePinhole(400, 400));
   }
 
   // Tests for isOverButton
@@ -713,7 +755,8 @@ class ExamplesSimon implements IConstants {
         && t.checkExpect(consLoButton.getNextSequence(), new ConsLoButton(new Button(Color.GREEN,
         400, 100), new ConsLoButton(new Button(Color.BLUE, 100, 400), new ConsLoButton(new Button(
         Color.YELLOW, 400, 400), new MtLoButton()))))
-        && t.checkExpect(partialLoButton.getNextSequence(), new ConsLoButton(new Button(Color.GREEN, 400, 100), new MtLoButton()));
+        && t.checkExpect(partialLoButton.getNextSequence(), new ConsLoButton(
+            new Button(Color.GREEN, 400, 100), new MtLoButton()));
   }
 
   // Tests for isDone
@@ -780,8 +823,9 @@ class ExamplesSimon implements IConstants {
     return t.checkExpect(partialLoButton.addInner(blueButton), partialLoButton2)
         && t.checkExpect(mtLoButton.addInner(blueButton), new ConsLoButton(blueButton, mtLoButton))
         && t.checkExpect(consLoButton.addInner(blueButton), new ConsLoButton(redButton,
-            new ConsLoButton(greenButton, new ConsLoButton(blueButton, new ConsLoButton(yellowButton,
-                new ConsLoButton(blueButton, mtLoButton))))));
+            new ConsLoButton(greenButton, new ConsLoButton(blueButton,
+                new ConsLoButton(yellowButton,
+                    new ConsLoButton(blueButton, mtLoButton))))));
   }
 
   // Tests for addToSequence
@@ -821,14 +865,23 @@ class ExamplesSimon implements IConstants {
       new TextImage("arbitrary loss message!", 20, Color.BLACK), SCENE_SIZE / 2, SCENE_SIZE / 2);
 
   // Examples for simon world
-  SimonWorld exSimonWorld1 = new SimonWorld(buttonsForGame, new Random(696969696), weirdOrderButtons);
-  SimonWorld exSimonWorld2 = new SimonWorld(exSimonWorld1, false, new EmptyImage(), weirdOrderButtons.getNextSequence());
-  SimonWorld exSimonWorld3 = new SimonWorld(exSimonWorld2, true, exSimonWorld2.tempSequence.drawDarkened(), weirdOrderButtons.getNextSequence());
-  SimonWorld exSimonWorld4 = new SimonWorld(exSimonWorld3, false, new EmptyImage(), weirdOrderButtons.getNextSequence().getNextSequence());
-  SimonWorld exSimonWorld5 = new SimonWorld(exSimonWorld4, false, false, new EmptyImage());
+  SimonWorld exSimonWorld1 = new SimonWorld(buttonsForGame,
+      new Random(696969696), weirdOrderButtons);
+  SimonWorld exSimonWorld2 = new SimonWorld(exSimonWorld1, false,
+      new EmptyImage(), weirdOrderButtons.getNextSequence());
+  SimonWorld exSimonWorld3 = new SimonWorld(exSimonWorld2, true,
+      exSimonWorld2.tempSequence.drawDarkened(), weirdOrderButtons.getNextSequence());
+  SimonWorld exSimonWorld4 = new SimonWorld(exSimonWorld3, false,
+      new EmptyImage(), weirdOrderButtons.getNextSequence().getNextSequence());
+  SimonWorld exSimonWorld5 = new SimonWorld(exSimonWorld4, false,
+      false, new EmptyImage());
 
-  SimonWorld exSimonWorld6 = new SimonWorld(exSimonWorld5, new MtLoButton().addInner(gameButtonBlue), gameButtonBlue.drawDark(), true);
-  SimonWorld exSimonWorld7 = new SimonWorld(exSimonWorld6, weirdOrderButtons.addInner(gameButtonGreen), weirdOrderButtons.addInner(gameButtonGreen).drawDarkened());
+  SimonWorld exSimonWorld6 = new SimonWorld(exSimonWorld5,
+      new MtLoButton().addInner(gameButtonBlue),
+      gameButtonBlue.drawDark(), true);
+  SimonWorld exSimonWorld7 = new SimonWorld(exSimonWorld6,
+      weirdOrderButtons.addInner(gameButtonGreen),
+      weirdOrderButtons.addInner(gameButtonGreen).drawDarkened());
 
   SimonWorld exSimonWorld8 = new SimonWorld(exSimonWorld6, new EmptyImage());
 
@@ -877,7 +930,8 @@ class ExamplesSimon implements IConstants {
   //runs the game by creating a world and calling bigBang
   boolean testSimonSays(Tester t) {
     Random random = new Random(696969696);
-    SimonWorld starterWorld = new SimonWorld(buttonsForGame, random, new MtLoButton().addToSequence(random));
+    SimonWorld starterWorld = new SimonWorld(buttonsForGame, random,
+        new MtLoButton().addToSequence(random));
     int sceneSize = SimonWorld.SCENE_SIZE;
     return starterWorld.bigBang(sceneSize, sceneSize, 1);
   }

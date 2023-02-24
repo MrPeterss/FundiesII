@@ -355,31 +355,140 @@ class MtLoButton implements ILoButton {
 
   // Does this sequence start with the given sequence?
   public boolean startsWith(ILoButton sequence) {
+
+    /* TEMPLATE FOR sequence
+      * Methods:
+      * ... sequence.drawButtons() ... -- WorldImage
+      * ... sequence.drawDarkened() ... -- WorldImage
+      * ... sequence.getNextSequence() ... -- ILoButton
+      * ... sequence.isDone() ... -- boolean
+      * ... sequence.isOverButton(Posn pos) ... -- Button
+      * ... sequence.startsWith(ILoButton sequence) ... -- boolean
+      * ... sequence.chop(ILoButton sequence) ... -- ILoButton
+      * ... sequence.chopHelp(Button button, ILoButton lob) ... -- ILoButton
+      * ... sequence.isSameAs(ILoButton sequence) ... -- boolean
+      * ... sequence.isSameAsHelper(Button button, ILoButton sequence) ... -- boolean
+      * ... sequence.addInner(Button b) ... -- ILoButton
+      * ... sequence.addToSequence(Random random) ... -- ILoButton
+     */
+
     return sequence.isSameAs(this);
   }
 
   // chop the list to the length of the given list
   public ILoButton chop(ILoButton sequence) {
+
+    /* TEMPLATE FOR sequence
+     * Methods:
+     * ... sequence.drawButtons() ... -- WorldImage
+     * ... sequence.drawDarkened() ... -- WorldImage
+     * ... sequence.getNextSequence() ... -- ILoButton
+     * ... sequence.isDone() ... -- boolean
+     * ... sequence.isOverButton(Posn pos) ... -- Button
+     * ... sequence.startsWith(ILoButton sequence) ... -- boolean
+     * ... sequence.chop(ILoButton sequence) ... -- ILoButton
+     * ... sequence.chopHelp(Button button, ILoButton lob) ... -- ILoButton
+     * ... sequence.isSameAs(ILoButton sequence) ... -- boolean
+     * ... sequence.isSameAsHelper(Button button, ILoButton sequence) ... -- boolean
+     * ... sequence.addInner(Button b) ... -- ILoButton
+     * ... sequence.addToSequence(Random random) ... -- ILoButton
+     */
+
     return new MtLoButton();
   }
 
   // helper for chop
   public ILoButton chopHelp(Button button, ILoButton lob) {
+
+    /* TEMPLATE FOR sequence
+     * Methods:
+     * ... sequence.drawButtons() ... -- WorldImage
+     * ... sequence.drawDarkened() ... -- WorldImage
+     * ... sequence.getNextSequence() ... -- ILoButton
+     * ... sequence.isDone() ... -- boolean
+     * ... sequence.isOverButton(Posn pos) ... -- Button
+     * ... sequence.startsWith(ILoButton sequence) ... -- boolean
+     * ... sequence.chop(ILoButton sequence) ... -- ILoButton
+     * ... sequence.chopHelp(Button button, ILoButton lob) ... -- ILoButton
+     * ... sequence.isSameAs(ILoButton sequence) ... -- boolean
+     * ... sequence.isSameAsHelper(Button button, ILoButton sequence) ... -- boolean
+     * ... sequence.addInner(Button b) ... -- ILoButton
+     * ... sequence.addToSequence(Random random) ... -- ILoButton
+     *
+     * TEMPLATE FOR button
+     * Methods:
+     * ... button.isSameButtonAs(Button button) ... -- boolean
+     * ... button.isOverButton(Posn pos) ... -- boolean
+     * ... button.drawButton() ... -- WorldImage
+     * ... button.drawLit() ... -- WorldImage
+     * ... button.drawDark() ... -- WorldImage
+     */
     return new MtLoButton();
   }
 
   // Is this sequence the same as the given sequence?
   public boolean isSameAs(ILoButton sequence) {
+
+    /* TEMPLATE FOR sequence
+     * Methods:
+     * ... sequence.drawButtons() ... -- WorldImage
+     * ... sequence.drawDarkened() ... -- WorldImage
+     * ... sequence.getNextSequence() ... -- ILoButton
+     * ... sequence.isDone() ... -- boolean
+     * ... sequence.isOverButton(Posn pos) ... -- Button
+     * ... sequence.startsWith(ILoButton sequence) ... -- boolean
+     * ... sequence.chop(ILoButton sequence) ... -- ILoButton
+     * ... sequence.chopHelp(Button button, ILoButton lob) ... -- ILoButton
+     * ... sequence.isSameAs(ILoButton sequence) ... -- boolean
+     * ... sequence.isSameAsHelper(Button button, ILoButton sequence) ... -- boolean
+     * ... sequence.addInner(Button b) ... -- ILoButton
+     * ... sequence.addToSequence(Random random) ... -- ILoButton
+     */
     return sequence.isSameAsHelper(NO_BUTTON, this);
   }
 
   // Helper for isSameAs
   public boolean isSameAsHelper(Button button, ILoButton sequence) {
+
+    /* TEMPLATE FOR button
+     * Methods:
+     * ... button.isSameButtonAs(Button button) ... -- boolean
+     * ... button.isOverButton(Posn pos) ... -- boolean
+     * ... button.drawButton() ... -- WorldImage
+     * ... button.drawLit() ... -- WorldImage
+     * ... button.drawDark() ... -- WorldImage
+     *
+     * TEMPLATE FOR sequence
+     * Methods:
+     * ... sequence.drawButtons() ... -- WorldImage
+     * ... sequence.drawDarkened() ... -- WorldImage
+     * ... sequence.getNextSequence() ... -- ILoButton
+     * ... sequence.isDone() ... -- boolean
+     * ... sequence.isOverButton(Posn pos) ... -- Button
+     * ... sequence.startsWith(ILoButton sequence) ... -- boolean
+     * ... sequence.chop(ILoButton sequence) ... -- ILoButton
+     * ... sequence.chopHelp(Button button, ILoButton lob) ... -- ILoButton
+     * ... sequence.isSameAs(ILoButton sequence) ... -- boolean
+     * ... sequence.isSameAsHelper(Button button, ILoButton sequence) ... -- boolean
+     * ... sequence.addInner(Button b) ... -- ILoButton
+     * ... sequence.addToSequence(Random random) ... -- ILoButton
+     */
+
     return button.isSameButtonAs(NO_BUTTON);
   }
 
   // add the value to the innermost part of the list
   public ILoButton addInner(Button b) {
+
+    /* TEMPLATE FOR b
+      * Methods:
+      * ... b.isSameButtonAs(Button button) ... -- boolean
+      * ... b.isOverButton(Posn pos) ... -- boolean
+      * ... b.drawButton() ... -- WorldImage
+      * ... b.drawLit() ... -- WorldImage
+      * ... b.drawDark() ... -- WorldImage
+     */
+
     return new ConsLoButton(b, new MtLoButton());
   }
 
@@ -490,26 +599,126 @@ class ConsLoButton implements ILoButton {
 
   // Does this sequence start with the given sequence?
   public boolean startsWith(ILoButton sequence) {
+
+    /* TEMPLATE FOR sequence
+     * Methods:
+     * ... sequence.drawButtons() ... -- WorldImage
+     * ... sequence.drawDarkened() ... -- WorldImage
+     * ... sequence.getNextSequence() ... -- ILoButton
+     * ... sequence.isDone() ... -- boolean
+     * ... sequence.isOverButton(Posn pos) ... -- Button
+     * ... sequence.startsWith(ILoButton sequence) ... -- boolean
+     * ... sequence.chop(ILoButton sequence) ... -- ILoButton
+     * ... sequence.chopHelp(Button button, ILoButton lob) ... -- ILoButton
+     * ... sequence.isSameAs(ILoButton sequence) ... -- boolean
+     * ... sequence.isSameAsHelper(Button button, ILoButton sequence) ... -- boolean
+     * ... sequence.addInner(Button b) ... -- ILoButton
+     * ... sequence.addToSequence(Random random) ... -- ILoButton
+     */
+
     return this.chop(sequence).isSameAs(sequence);
   }
 
   // chop off the buttons after the given sequence length
   public ILoButton chop(ILoButton sequence) {
+
+    /* TEMPLATE FOR sequence
+     * Methods:
+     * ... sequence.drawButtons() ... -- WorldImage
+     * ... sequence.drawDarkened() ... -- WorldImage
+     * ... sequence.getNextSequence() ... -- ILoButton
+     * ... sequence.isDone() ... -- boolean
+     * ... sequence.isOverButton(Posn pos) ... -- Button
+     * ... sequence.startsWith(ILoButton sequence) ... -- boolean
+     * ... sequence.chop(ILoButton sequence) ... -- ILoButton
+     * ... sequence.chopHelp(Button button, ILoButton lob) ... -- ILoButton
+     * ... sequence.isSameAs(ILoButton sequence) ... -- boolean
+     * ... sequence.isSameAsHelper(Button button, ILoButton sequence) ... -- boolean
+     * ... sequence.addInner(Button b) ... -- ILoButton
+     * ... sequence.addToSequence(Random random) ... -- ILoButton
+     */
+
     return sequence.chopHelp(this.first, this.rest);
   }
 
   // helper for chop
   public ILoButton chopHelp(Button button, ILoButton lob) {
+
+    /* TEMPLATE FOR lob
+     * Methods:
+     * ... lob.drawButtons() ... -- WorldImage
+     * ... lob.drawDarkened() ... -- WorldImage
+     * ... lob.getNextSequence() ... -- ILoButton
+     * ... lob.isDone() ... -- boolean
+     * ... lob.isOverButton(Posn pos) ... -- Button
+     * ... lob.startsWith(ILoButton sequence) ... -- boolean
+     * ... lob.chop(ILoButton sequence) ... -- ILoButton
+     * ... lob.chopHelp(Button button, ILoButton lob) ... -- ILoButton
+     * ... lob.isSameAs(ILoButton sequence) ... -- boolean
+     * ... lob.isSameAsHelper(Button button, ILoButton sequence) ... -- boolean
+     * ... lob.addInner(Button b) ... -- ILoButton
+     * ... lob.addToSequence(Random random) ... -- ILoButton
+     *
+     * TEMPLATE FOR button
+     * Methods:
+     * ... button.isSameButtonAs(Button) ... -- boolean
+     * ... button.isOverButton(Posn) ... -- boolean
+     * ... button.drawLit() ... -- WorldImage
+     * ... button.drawDark() ... -- WorldImage
+     * ... button.drawButton(Color) ... -- WorldImage
+     */
+
     return new ConsLoButton(button,lob.chop(this.rest));
   }
 
   // Is this sequence the same as the given sequence?
   public boolean isSameAs(ILoButton sequence) {
+
+    /* TEMPLATE FOR sequence
+     * Methods:
+     * ... sequence.drawButtons() ... -- WorldImage
+     * ... sequence.drawDarkened() ... -- WorldImage
+     * ... sequence.getNextSequence() ... -- ILoButton
+     * ... sequence.isDone() ... -- boolean
+     * ... sequence.isOverButton(Posn pos) ... -- Button
+     * ... sequence.startsWith(ILoButton sequence) ... -- boolean
+     * ... sequence.chop(ILoButton sequence) ... -- ILoButton
+     * ... sequence.chopHelp(Button button, ILoButton lob) ... -- ILoButton
+     * ... sequence.isSameAs(ILoButton sequence) ... -- boolean
+     * ... sequence.isSameAsHelper(Button button, ILoButton sequence) ... -- boolean
+     * ... sequence.addInner(Button b) ... -- ILoButton
+     * ... sequence.addToSequence(Random random) ... -- ILoButton
+     */
+
     return sequence.isSameAsHelper(this.first, this.rest);
   }
 
   // Helper for isSameAs
   public boolean isSameAsHelper(Button button, ILoButton sequence) {
+
+    /* TEMPLATE FOR button
+      * Methods:
+      * ... button.isSameButtonAs(Button) ... -- boolean
+      * ... button.isOverButton(Posn) ... -- boolean
+      * ... button.drawLit() ... -- WorldImage
+      * ... button.drawDark() ... -- WorldImage
+      * ... button.drawButton(Color) ... -- WorldImage
+      *
+      * TEMPLATE FOR sequence
+      * ... sequence.drawButtons() ... -- WorldImage
+      * ... sequence.drawDarkened() ... -- WorldImage
+      * ... sequence.getNextSequence() ... -- ILoButton
+      * ... sequence.isDone() ... -- boolean
+      * ... sequence.isOverButton(Posn pos) ... -- Button
+      * ... sequence.startsWith(ILoButton sequence) ... -- boolean
+      * ... sequence.chop(ILoButton sequence) ... -- ILoButton
+      * ... sequence.chopHelp(Button button, ILoButton lob) ... -- ILoButton
+      * ... sequence.isSameAs(ILoButton sequence) ... -- boolean
+      * ... sequence.isSameAsHelper(Button button, ILoButton sequence) ... -- boolean
+      * ... sequence.addInner(Button b) ... -- ILoButton
+      * ... sequence.addToSequence(Random random) ... -- ILoButton
+    */
+
     if (button.isSameButtonAs(NO_BUTTON)) {
       return false;
     } else {
@@ -519,6 +728,16 @@ class ConsLoButton implements ILoButton {
 
   // add the value to the innermost part of the list
   public ILoButton addInner(Button b) {
+
+    /* TEMPLATE FOR b
+     * Methods:
+     * ... b.isSameButtonAs(Button) ... -- boolean
+     * ... b.isOverButton(Posn) ... -- boolean
+     * ... b.drawLit() ... -- WorldImage
+     * ... b.drawDark() ... -- WorldImage
+     * ... b.drawButton(Color) ... -- WorldImage
+     */
+
     return new ConsLoButton(this.first, this.rest.addInner(b));
   }
 
@@ -929,7 +1148,7 @@ class ExamplesSimon implements IConstants {
 
   //runs the game by creating a world and calling bigBang
   boolean testSimonSays(Tester t) {
-    Random random = new Random(696969696);
+    Random random = new Random();
     SimonWorld starterWorld = new SimonWorld(buttonsForGame, random,
         new MtLoButton().addToSequence(random));
     int sceneSize = SimonWorld.SCENE_SIZE;

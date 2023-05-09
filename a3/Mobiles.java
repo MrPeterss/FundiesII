@@ -1,3 +1,5 @@
+package HW.a3;
+
 import javalib.worldimages.*;
 import tester.Tester;
 

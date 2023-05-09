@@ -1,3 +1,5 @@
+package HW.a5;
+
 import javalib.funworld.World;
 import javalib.funworld.WorldScene;
 import javalib.worldimages.*;

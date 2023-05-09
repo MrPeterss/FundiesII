@@ -1,3 +1,5 @@
+package HW.a3;
+
 import tester.*;
 
 // to represent a list of Strings
@@ -51,6 +53,7 @@ interface ILoString {
 // to represent an empty list of Strings
 class MtLoString implements ILoString {
   MtLoString() {
+
   }
 
   /*
